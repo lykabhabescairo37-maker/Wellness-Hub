@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellness Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="setupScreen" class="setup-screen">
+    <form id="profileSetup" class="setup-card">
+      <div>
+        <p class="eyebrow">Wellness Hub</p>
+        <h1>Set up your profile</h1>
+      </div>
+
+      <label>
+        Nickname
+        <input id="profileName" maxlength="30" placeholder="What should we call you?" required />
+      </label>
+
+      <label>
+        Sex
+        <select id="profileSex" required>
+          <option value="">Select</option>
+          <option>Female</option>
+          <option>Male</option>
+          <option>Intersex</option>
+          <option>Prefer not to say</option>
+        </select>
+      </label>
+
+      <label>
+        Weight
+        <span class="weight-row">
+          <input id="profileWeight" type="number" min="20" max="500" step="0.1" placeholder="Weight" required />
+          <select id="profileUnit" aria-label="Weight unit">
+            <option>kg</option>
+            <option>lb</option>
+          </select>
+        </span>
+      </label>
+
+      <label>
+        Main body goal
+        <select id="profileGoal" required>
+          <option value="">Choose a goal</option>
+          <option>Lose weight</option>
+          <option>Build muscle</option>
+          <option>Improve fitness</option>
+          <option>Maintain my health</option>
+        </select>
+      </label>
+
+      <button type="submit">Start</button>
+    </form>
+  </main>
+
+  <div class="app hidden" id="app">
+    <header class="top">
+      <h1>Wellness Hub</h1>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="dashboard">🏠 Home</button>
+      <button class="tab" data-tab="food">🍎 Food</button>
+      <button class="tab" data-tab="workouts">💪 Workouts</button>
+      <button class="tab" data-tab="habits">💧 Habits</button>
+      <button class="tab" data-tab="planner">🎯 Planner</button>
+    </nav>
+
+    <main>
+      <!-- HOME -->
+      <section id="tab-dashboard" class="panel">
+        <h2 id="greeting">Hello!</h2>
+        <p class="hint">Here's your day at a glance.</p>
+        <div id="stats" class="stats"></div>
+
+        <h3>Movement this week (minutes)</h3>
+        <div id="moveChart" class="chart"></div>
+
+        <h3>Food logged this week (kcal)</h3>
+        <div id="foodChart" class="chart"></div>
+      </section>
+
+      <!-- FOOD -->
+      <section id="tab-food" class="panel hidden">
+        <h2>Food Log 🍎</h2>
+        <p class="hint">A simple food diary. Type in your own foods and numbers.</p>
+        <div class="form-row">
+          <select id="foodMeal" aria-label="Meal">
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+            <option>Snack</option>
+          </select>
+          <input id="foodName" placeholder="Food (e.g. oatmeal)" maxlength="40" />
+          <input id="foodCal" type="number" min="0" max="5000" placeholder="Calories" />
+          <button id="foodAdd">Add</button>
+        </div>
+        <p id="foodMsg" class="msg"></p>
+        <div id="foodList"></div>
+        <p class="total">Total today: <strong id="foodTotal">0</strong> kcal</p>
+      </section>
+
+      <!-- WORKOUTS -->
+      <section id="tab-workouts" class="panel hidden">
+        <h2>Workouts 💪</h2>
+        <p class="hint">Indoor routines, no equipment needed. Stop if anything hurts.</p>
+        <div id="routineList" class="routines"></div>
+
+        <div id="runner" class="runner hidden">
+          <p id="runnerRoutine" class="runner-routine"></p>
+          <p id="runnerStep" class="runner-step"></p>
+          <div id="runnerTime" class="runner-time">00:00</div>
+          <p id="runnerCount" class="runner-count"></p>
+          <div class="runner-buttons">
+            <button id="runnerStart">Start</button>
+            <button id="runnerSkip" class="ghost">Skip</button>
+            <button id="runnerStop" class="ghost">Stop</button>
+          </div>
+        </div>
+
+        <h3>Today's workouts</h3>
+        <div id="workoutLog"></div>
+      </section>
+
+      <!-- HABITS -->
+      <section id="tab-habits" class="panel hidden">
+        <h2>Daily Habits 💧</h2>
+        <p class="hint">Small steps, every day.</p>
+        <div id="habitList" class="habits"></div>
+        <button id="habitReset" class="ghost">Reset today</button>
+      </section>
+
+      <!-- PLANNER -->
+      <section id="tab-planner" class="panel hidden">
+        <h2>Planner 🎯</h2>
+
+        <h3>Weekly goals</h3>
+        <div class="form-row">
+          <input id="goalInput" placeholder="Add a goal (e.g. stretch 3 times)" maxlength="60" />
+          <button id="goalAdd">Add</button>
+        </div>
+        <div id="goalList"></div>
+        <button id="goalClear" class="ghost">Clear completed</button>
+
+        <h3>Mood journal</h3>
+        <p class="hint">How was your day?</p>
+        <div id="moodPicker" class="mood-picker"></div>
+        <textarea id="journalNote" rows="3" maxlength="300" placeholder="Write a little note (optional)"></textarea>
+        <button id="journalSave">Save today's entry</button>
+        <p id="journalMsg" class="msg"></p>
+        <div id="journalList"></div>
+      </section>
+    </main>
+
+    <p class="note">General wellness tool, not medical advice. Your data stays in your browser.</p>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="food.js"></script>
+  <script src="workout.js"></script>
+  <script src="habits.js"></script>
+  <script src="planner.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
